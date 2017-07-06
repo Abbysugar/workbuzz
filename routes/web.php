@@ -28,4 +28,12 @@ Route::get('/adduser', 'HomeController@addUser')->name('adduser');
 Route::post('/adduser', 'HomeController@saveUser')->name('saveuser');
 // Route::any('/adduser', 'HomeController@addUser')->name('adduser');
 Route::get('/employees', 'HomeController@getEmployees')->name('employees');
-Route::any('myprofile', 'HomeController@getProfile')->name('profile');
+Route::any('/myprofile', 'HomeController@getProfile')->name('profile');
+
+/**
+ * Routes for Admin to view,
+ * edit and delete users
+ */
+Route::get('/userprofile/{user_id}', 'AdminController@viewUser')->name('userprofile');
+Route::any('/updateuser/{user_id}', 'AdminController@editUser')->name('updateuser');
+Route::get('/deleteuser/{user_id}', 'AdminController@deleteUser')->name('deleteuser');

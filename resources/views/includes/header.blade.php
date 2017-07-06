@@ -11,9 +11,9 @@
         </span>
         <!-- This "nav-menu" is hidden on mobile -->
         <!-- Add the modifier "is-active" to display it on mobile -->
-        <h1 class="title">
-          Workbuzz
-        </h1>
+        <a href="{{ route('home') }}" class="title">
+          <h1 class="title">Workbuzz</h1>
+        </a>
         <div class="nav-right nav-menu is-active">
           <a href="{{ route('home') }}" class="nav-item">
             Home

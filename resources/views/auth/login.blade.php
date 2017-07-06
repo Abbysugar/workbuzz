@@ -6,11 +6,11 @@
         <div class="columns">
             <div class="column is-6 is-offset-3">
                 <div class="has-text-centered" style="margin-top: 100px">
-                    <h1 class="title"> Login</h1>
+                    <h1 class="title"> Login </h1>
                 </div>
                 <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
-                    <div class="box" style="margin-top: 100px;">
+                    <div class="box" style="margin-top: 100px">
                         <div class="field{{ $errors->has('email') ? ' has-error' : '' }}">
                           <label class="label">Email</label>
                           <p class="control has-icons-left">

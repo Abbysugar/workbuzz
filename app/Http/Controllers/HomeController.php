@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -70,6 +72,7 @@ class HomeController extends Controller
                 'email'     => 'required|string|email|max:255|unique:users',
                 'hire_date' => 'required',
                 'job_title' => 'required',
+                'department' => 'required',
             ]);
 
         User::create([
@@ -77,6 +80,7 @@ class HomeController extends Controller
                 'email'     => $request->email,
                 'hire_date' => $request->hire_date,
                 'job_title' => $request->job_title,
+                'department' => $request->department,
                 'role'      => 0,
             ]);
 
@@ -95,13 +99,16 @@ class HomeController extends Controller
 
         switch ($method) {
             case true:
-                $this->validate($request, [
+                $this->validate(request(), [
                 'manager'      => 'required',
                 'location'     => 'required',
                 'dob'          => 'required',
                 'job_title'    => 'required',
+                'department' => 'required',
                 'gender'       => 'required',
                 'marital_status' => 'required',
+                'address' => 'required',
+                'phone' => 'required|max:11'
             ]);
 
                 $user = User::where('id', Auth::user()->id)->first();
@@ -111,7 +118,20 @@ class HomeController extends Controller
                 $user->dob = $request->dob;
                 $user->gender = $request->gender;
                 $user->job_title = $request->job_title;
+                $user->department = $request->department;
                 $user->marital_status = $request->marital_status;
+                $user->address = $request->address;
+                $user->phone = $request->phone;
+
+                if ($request->file('image') != null) {
+
+                    $file     = $request->file('image');
+                    $filename = $request['name'] . '-' . $user->id . '.jpg';
+
+                    Storage::disk('uploads')->put($filename, File::get($file));
+
+                    $user->image = $filename;
+                }
 
                 $user->save();
 
@@ -120,5 +140,12 @@ class HomeController extends Controller
         default:
             return view('user.myprofile');
         }
+    }
+
+    public function userImage($filename)
+    {
+        $file = Storage::disk('local')->get($filename);
+
+        return new Response($file, 200);
     }
 }

@@ -67,6 +67,19 @@
             @endif
           </div>
 
+          <div class="field{{ $errors->has('department') ? ' has-error' : '' }}">
+            <label class="label">Department</label>
+            <p class="control has-icons-left">
+              <input class="input" type="text" name="department" placeholder="Employee department" value="{{ old('department') }}">
+              <span class="icon is-small is-left">
+                <i class="fa fa-building"></i>
+              </span>
+            </p>
+            @if ($errors->has('department'))
+              <p class="help is-danger">{{ $errors->first('department') }}</p>
+            @endif
+          </div>
+
           <div class="field is-grouped">
             <p class="control">
               <button class="button is-success">Submit</button>

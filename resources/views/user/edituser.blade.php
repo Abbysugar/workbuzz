@@ -3,22 +3,23 @@
 @section('content')
 @include('includes.header')
 @include('includes.error')
+
 <div class="container" style="margin-top: 20px">
   <div class="columns">
     <div class="column is-4">
-      @include('includes.usercard')
+      @include('includes.usercard_foreign')
     </div>
     <div class="column is-8">
       <div class="box">
-        My Profile
+        {{ $user->name }}'s Profile
       </div>
         <div class="box">
-        <form class="form-horizontal" method="POST" action="{{ route('profile') }}" enctype="multipart/form-data">
+        <form class="form-horizontal" method="POST" action="{{ url('/updateuser/'.$user->id) }}">
           {{ csrf_field() }}
           <div class="field{{ $errors->has('manager') ? ' has-error' : '' }}">
             <label class="label">Manager</label>
             <p class="control has-icons-left">
-              <input class="input" type="text" name="manager" placeholder="your manager" value="{{ Auth::user()->manager }}">
+              <input class="input" type="text" name="manager" placeholder="your manager" value="{{ $user->manager }}">
               <span class="icon is-small is-left">
                 <i class="fa fa-user"></i>
               </span>
@@ -31,7 +32,7 @@
           <div class="field{{ $errors->has('location') ? ' has-error' : '' }}">
             <label class="label">Location</label>
             <p class="control has-icons-left">
-              <input class="input" type="text" name="location" placeholder="work location" value="{{ Auth::user()->location }}">
+              <input class="input" type="text" name="location" placeholder="work location" value="{{ $user->location }}">
               <span class="icon is-small is-left">
                 <i class="fa fa-map-marker"></i>
               </span>
@@ -44,7 +45,7 @@
           <div class="field{{ $errors->has('job_title') ? ' has-error' : '' }}">
             <label class="label">Job Title</label>
             <p class="control has-icons-left">
-              <input class="input" type="text" name="job_title" placeholder="Job title" value="{{ Auth::user()->job_title }}">
+              <input class="input" type="text" name="job_title" placeholder="Job title" value="{{ $user->job_title }}">
               <span class="icon is-small is-left">
                 <i class="fa fa-briefcase"></i>
               </span>
@@ -57,7 +58,7 @@
           <div class="field{{ $errors->has('job_title') ? ' has-error' : '' }}">
             <label class="label">Department</label>
             <p class="control has-icons-left">
-              <input class="input" type="text" name="department" placeholder="department" value="{{ Auth::user()->department }}">
+              <input class="input" type="text" name="department" placeholder="department" value="{{ $user->department }}">
               <span class="icon is-small is-left">
                 <i class="fa fa-building"></i>
               </span>
@@ -70,7 +71,7 @@
           <div class="field{{ $errors->has('email') ? ' has-error' : '' }}">
             <label class="label">dob</label>
             <p class="control has-icons-left">
-              <input class="input" type="date" name="dob" placeholder="birthday" value="{{ Auth::user()->dob }}">
+              <input class="input" type="date" name="dob" placeholder="birthday" value="{{ $user->dob }}">
               <span class="icon is-small is-left">
                 <i class="fa fa-calendar"></i>
               </span>
@@ -85,9 +86,9 @@
             <p class="control has-icons-left">
             <span class="select"> 
                 <select class="input" type="text" name="gender">
-                  <option {{ (Auth::user()->gender == 'female') ? 'selected="selected"' : '' }}>female</option>
-                  <option {{ (Auth::user()->gender == 'male') ? 'selected="selected"' : '' }}>male</option>
-                  <option {{ (Auth::user()->gender == 'other') ? 'selected="selected"' : '' }}>other</option>
+                  <option {{ ($user->gender == 'female') ? 'selected="selected"' : '' }}>female</option>
+                  <option {{ ($user->gender == 'male') ? 'selected="selected"' : '' }}>male</option>
+                  <option {{ ($user->gender == 'other') ? 'selected="selected"' : '' }}>other</option>
                 </select>
               </span>
             <span class="icon is-small is-left">
@@ -104,10 +105,10 @@
             <label class="label">Marital Status</label>
             <p class="control has-icons-left">
             <span class="select"> 
-                <select class="input" type="text" name="marital_status" value="{{ Auth::user()->marital_status}}">
-                  <option {{ (Auth::user()->marital_status == 'single') ? 'selected="selected"' : '' }}> single</option>
-                  <option {{ (Auth::user()->marital_status == 'married') ? 'selected="selected"' : '' }}> married</option>
-                  <option {{ (Auth::user()->marital_status == 'divorced') ? 'selected="selected"' : '' }}> divorced</option>
+                <select class="input" type="text" name="marital_status" value="{{ $user->marital_status}}">
+                  <option {{ ($user->marital_status == 'single') ? 'selected="selected"' : '' }}> single</option>
+                  <option {{ ($user->marital_status == 'married') ? 'selected="selected"' : '' }}> married</option>
+                  <option {{ ($user->marital_status == 'divorced') ? 'selected="selected"' : '' }}> divorced</option>
                 </select>
               </span>
             <span class="icon is-small is-left">
@@ -123,7 +124,7 @@
           <div class="field{{ $errors->has('email') ? ' has-error' : '' }}">
             <label class="label">Address</label>
             <p class="control has-icons-left">
-              <input class="input" type="text" name="address" placeholder="home address" value="{{ Auth::user()->address }}">
+              <input class="input" type="text" name="address" placeholder="home address" value="{{ $user->address }}">
               <span class="icon is-small is-left">
                 <i class="fa fa-home"></i>
               </span>
@@ -136,7 +137,7 @@
           <div class="field{{ $errors->has('email') ? ' has-error' : '' }}">
             <label class="label">Phone</label>
             <p class="control has-icons-left">
-              <input class="input" type="text" name="phone" placeholder="phone number" value="{{ Auth::user()->phone }}">
+              <input class="input" type="text" name="phone" placeholder="phone number" value="{{ $user->phone }}">
               <span class="icon is-small is-left">
                 <i class="fa fa-phone"></i>
               </span>
@@ -146,34 +147,9 @@
             @endif
           </div>
 
-          <div class="field{{ $errors->has('status') ? ' has-error' : '' }}">
-            <label class="label">Status</label>
-            <p class="control has-icons-left">
-            <span class="select"> 
-                <select class="input" type="text" name="marital_status" value="{{ Auth::user()->marital_status}}">
-                  <option {{ (Auth::user()->marital_status == 'single') ? 'selected="selected"' : '' }}> single</option>
-                  <option {{ (Auth::user()->marital_status == 'married') ? 'selected="selected"' : '' }}> married</option>
-                  <option {{ (Auth::user()->marital_status == 'divorced') ? 'selected="selected"' : '' }}> divorced</option>
-                </select>
-              </span>
-            <span class="icon is-small is-left">
-              <i class="fa fa-heart"></i>
-            </span>
-              
-            </p>
-            @if ($errors->has('marital_status'))
-              <p class="help is-danger">{{ $errors->first('marital_status') }}</p>
-            @endif
-          </div>
-
-          <div class="group">
-          <label for="image"> Image (.jpg) </label>
-          <input class="control" id="name" name="image" type="file" >
-        </div>
-
           <div class="field is-grouped">
             <p class="control">
-              <button class="button is-success">Save</button>
+              <button class="button is-success">Save Changes</button>
             </p>
           </div>
         </div>
