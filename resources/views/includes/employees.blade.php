@@ -10,7 +10,7 @@
     <div class="media-content">
       <div class="content">
         <p>
-           <strong>{{ $user->name }}</strong> <small>{{ $user->job_title }} in {{ $user->department }}</small>
+           <strong>{{ $user->name }}</strong>  <span class="{{ ($user->status == 1)  ? 'greenball' : 'blackball'  }}"></span><small>{{ $user->job_title }} in {{ $user->department }}</small>
           <br>
           <small><i class="fa fa-map-marker"></i>&nbsp;&nbsp; {{ $user->location }} -</small><small>&nbsp;started {{ Carbon\Carbon::createFromFormat('d/m/Y', $user->hire_date)->toFormattedDateString() }}</small>
         </p>

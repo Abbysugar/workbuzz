@@ -23,13 +23,15 @@ Auth::routes();
  * view all employees and view profile
  * pages
  */
-Route::get('/home', 'HomeController@index')->name('home');
+
 // Route::get('/adduser', 'HomeController@addUser')->name('adduser');
 // Route::post('/adduser', 'HomeController@saveUser')->name('saveuser');
-
-Route::get('/employees', 'HomeController@getEmployees')->name('employees');
-Route::any('/myprofile', 'HomeController@getProfile')->name('profile');
-Route::get('/userprofile/{user_id}', 'AdminController@viewUser')->name('userprofile');
+Route::group(['middleware' => ['user']], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/employees', 'HomeController@getEmployees')->name('employees');
+    Route::any('/myprofile', 'HomeController@getProfile')->name('profile');
+    Route::get('/userprofile/{user_id}', 'AdminController@viewUser')->name('userprofile');
+});
 
 /**
  * Routes for Admin to view,

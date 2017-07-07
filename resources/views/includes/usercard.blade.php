@@ -13,7 +13,7 @@
           </figure> -->
         </div>
         <div class="media-content">
-          <p class="title is-4">{{ Auth::user()->name }}</p>
+          <p class="title is-4">{{ Auth::user()->name }} <span class="{{ (Auth::user()->status == 1)  ? 'greenball' : 'blackball'  }}"></span></p>
           <p class="subtitle is-6">{{ Auth::user()->location }}</p>
         </div>
       </div>

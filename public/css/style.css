@@ -29,18 +29,18 @@
 		background: #42b72a;
 		border-radius: 50%;
 		display: inline-block;
-		height: 15px;
+		height: 10px;
 		margin: 0 3px 1px 0;
 		vertical-align: middle;
-		width: 15px;
+		width: 10px;
 }
 
 .blackball {
 		background: #000;
 		border-radius: 50%;
 		display: inline-block;
-		height: 15px;
+		height: 10px;
 		margin: 0 3px 1px 0;
 		vertical-align: middle;
-		width: 15px;
+		width: 10px;
 }

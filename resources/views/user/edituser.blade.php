@@ -16,6 +16,19 @@
         <div class="box">
         <form class="form-horizontal" method="POST" action="{{ url('/updateuser/'.$user->id) }}">
           {{ csrf_field() }}
+          <div class="field{{ $errors->has('name') ? ' has-error' : '' }}">
+            <label class="label">Name</label>
+            <p class="control has-icons-left">
+              <input class="input" type="text" name="name" placeholder="name" value="{{ $user->name }}">
+              <span class="icon is-small is-left">
+                <i class="fa fa-user"></i>
+              </span>
+            </p>
+            @if ($errors->has('name'))
+              <p class="help is-danger">{{ $errors->first('name') }}</p>
+            @endif
+          </div>
+
           <div class="field{{ $errors->has('manager') ? ' has-error' : '' }}">
             <label class="label">Manager</label>
             <p class="control has-icons-left">
@@ -145,6 +158,26 @@
             @if ($errors->has('phone'))
               <p class="help is-danger">{{ $errors->first('phone') }}</p>
             @endif
+          </div>
+
+          <div class="field is-horizontal">
+            <div class="field-label">
+              <label class="label">Status</label>
+            </div>
+            <div class="field-body">
+              <div class="field is-narrow">
+                <div class="control">
+                  <label class="radio">
+                    <input type="radio" name="status" value="1"  {{ ($user->status == 1) ? 'checked="checked"' : '' }}>
+                    Active
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="status" value="0" {{ ($user->status == 0) ? 'checked="checked"' : '' }}>
+                    Inactive
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="field is-grouped">

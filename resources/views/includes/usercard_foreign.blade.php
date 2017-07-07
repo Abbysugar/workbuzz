@@ -13,7 +13,7 @@
           </figure>
         </div> -->
         <div class="media-content">
-          <p class="title is-4">{{ $user->name }}</p>
+          <p class="title is-4">{{ $user->name }} <span class="{{ ($user->status == 1)  ? 'greenball' : 'blackball'  }}"></span></p>
           <p class="subtitle is-6">{{ $user->location }}</p>
         </div>
       </div>
