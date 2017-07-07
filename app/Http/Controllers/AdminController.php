@@ -32,7 +32,7 @@ class AdminController extends Controller
                 'gender'       => 'required',
                 'marital_status' => 'required',
                 'address' => 'required',
-                'phone' => 'required|max:11'
+                'phone' => 'required|max:11',
             ]);
 
             $user->manager = $request['manager'];
@@ -45,6 +45,7 @@ class AdminController extends Controller
             $user->marital_status = $request['marital_status'];
             $user->address = $request['address'];
             $user->phone = $request['phone'];
+            $user->status = $request['status'];
 
             $user->save();
 

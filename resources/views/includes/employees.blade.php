@@ -15,6 +15,7 @@
           <small><i class="fa fa-map-marker"></i>&nbsp;&nbsp; {{ $user->location }} -</small><small>&nbsp;started {{ Carbon\Carbon::createFromFormat('d/m/Y', $user->hire_date)->toFormattedDateString() }}</small>
         </p>
       </div>
+      @if(!\Request::is('home'))
       <nav class="level is-mobile">
         <div class="level-left">
           <a href="{{ url('/userprofile/'.$user->id) }}" class="level-item tooltip">
@@ -33,6 +34,7 @@
           @endif
         </div>
       </nav>
+      @endif
     </div>
   </article>
 </div>

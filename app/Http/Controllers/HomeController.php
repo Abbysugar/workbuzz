@@ -31,61 +31,63 @@ class HomeController extends Controller
         return view('home', compact('users'));
     }
 
-    public function addUser()
-    {
-        return view('user.adduser');
-    }
-
-    // public function saveUser(Request $request)
+    // public function addUser()
     // {
-    //     $method = $request->isMethod('post');
-
-    //     switch ($method){
-    //         case true:
-    //             $this->validate($request, [
-    //                 'name'      => 'required',
-    //                 'email'     => 'required|string|email|max:255|unique:users',
-    //                 'hire_date' => 'required',
-    //                 'job_title' => 'required',
-    //             ]);
-
-    //             User::create([
-    //                     'name'      => $request->name,
-    //                     'email'     => $request->email,
-    //                     'hire_date' => $request->hire_date,
-    //                     'job_title' => $request->job_title,
-    //                     'role'      => 0,
-    //                 ]);
-
-    //             return redirect()->back()->with(['message' => 'Successfully created user!']);
-
-    //         default:
-    //             return view('user.adduser');
-    //     }       
-
-        
+    //     return view('user.adduser');
     // }
+
     public function saveUser(Request $request)
     {
-        $this->validate($request, [
-                'name'      => 'required',
-                'email'     => 'required|string|email|max:255|unique:users',
-                'hire_date' => 'required',
-                'job_title' => 'required',
-                'department' => 'required',
-            ]);
+        $method = $request->isMethod('post');
 
-        User::create([
-                'name'      => $request->name,
-                'email'     => $request->email,
-                'hire_date' => $request->hire_date,
-                'job_title' => $request->job_title,
-                'department' => $request->department,
-                'role'      => 0,
-            ]);
+        switch ($method){
+            case true:
+                $this->validate($request, [
+                    'name'      => 'required',
+                    'email'     => 'required|string|email|max:255|unique:users',
+                    'hire_date' => 'required',
+                    'job_title' => 'required',
+                ]);
 
-        return redirect()->back()->with(['message' => 'Successfully created user!']);
+                User::create([
+                        'name'      => $request->name,
+                        'email'     => $request->email,
+                        'hire_date' => $request->hire_date,
+                        'job_title' => $request->job_title,
+                        'role'      => 0,
+                    ]);
+
+                return redirect()->back()->with(['message' => 'Successfully created user!']);
+
+            default:
+                return view('user.adduser');
+        }       
+
+        
     }
+    
+    // public function saveUser(Request $request)
+    // {
+    //     $this->validate($request, [
+    //             'name'      => 'required',
+    //             'email'     => 'required|string|email|max:255|unique:users',
+    //             'hire_date' => 'required',
+    //             'job_title' => 'required',
+    //             'department' => 'required',
+    //         ]);
+
+    //     User::create([
+    //             'name'      => $request->name,
+    //             'email'     => $request->email,
+    //             'hire_date' => $request->hire_date,
+    //             'job_title' => $request->job_title,
+    //             'department' => $request->department,
+    //             'role'      => 0,
+    //             'status'    => 1,
+    //         ]);
+
+    //     return redirect()->back()->with(['message' => 'Successfully created user!']);
+    // }
 
     public function getEmployees()
     {
@@ -100,16 +102,17 @@ class HomeController extends Controller
         switch ($method) {
             case true:
                 $this->validate(request(), [
-                'manager'      => 'required',
-                'location'     => 'required',
-                'dob'          => 'required',
-                'job_title'    => 'required',
-                'department' => 'required',
-                'gender'       => 'required',
-                'marital_status' => 'required',
-                'address' => 'required',
-                'phone' => 'required|max:11'
-            ]);
+                    'manager'      => 'required',
+                    'location'     => 'required',
+                    'dob'          => 'required',
+                    'job_title'    => 'required',
+                    'department' => 'required',
+                    'gender'       => 'required',
+                    'marital_status' => 'required',
+                    'address' => 'required',
+                    'phone' => 'required|max:11',
+                    'status' => 'required',
+                ]);
 
                 $user = User::where('id', Auth::user()->id)->first();
 
@@ -122,6 +125,7 @@ class HomeController extends Controller
                 $user->marital_status = $request->marital_status;
                 $user->address = $request->address;
                 $user->phone = $request->phone;
+                $user->status = $request->status;
 
                 if ($request->file('image') != null) {
 

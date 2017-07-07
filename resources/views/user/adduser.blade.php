@@ -1,3 +1,4 @@
+@if (Auth::user()->role == 1)
 @extends('layouts.app')
 
 @section('content')
@@ -13,7 +14,7 @@
         Add New User
       </div>
       <div class="box">
-        <form class="form-horizontal" method="POST" action="{{ route('saveuser') }}">
+        <form class="form-horizontal" method="POST" action="{{ route('adduser') }}">
           {{ csrf_field() }}
           <div class="field{{ $errors->has('email') ? ' has-error' : '' }}">
             <label class="label">Name</label>
@@ -91,3 +92,4 @@
   </div>
 </div>
 @endsection
+@endif

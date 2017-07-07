@@ -49,6 +49,10 @@
           <div class="field">
             <label class="label">Phone Number:</label> {{ $user->phone }}
           </div>
+
+          <div class="field">
+            <label class="label"> Status: <span class="{{ ($user->status == 1)  ? 'greenball' : 'blackball'  }}"></span></label>
+          </div>
         </div>
     </div>
       

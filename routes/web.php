@@ -24,16 +24,19 @@ Auth::routes();
  * pages
  */
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/adduser', 'HomeController@addUser')->name('adduser');
-Route::post('/adduser', 'HomeController@saveUser')->name('saveuser');
-// Route::any('/adduser', 'HomeController@addUser')->name('adduser');
+// Route::get('/adduser', 'HomeController@addUser')->name('adduser');
+// Route::post('/adduser', 'HomeController@saveUser')->name('saveuser');
+
 Route::get('/employees', 'HomeController@getEmployees')->name('employees');
 Route::any('/myprofile', 'HomeController@getProfile')->name('profile');
+Route::get('/userprofile/{user_id}', 'AdminController@viewUser')->name('userprofile');
 
 /**
  * Routes for Admin to view,
  * edit and delete users
  */
-Route::get('/userprofile/{user_id}', 'AdminController@viewUser')->name('userprofile');
-Route::any('/updateuser/{user_id}', 'AdminController@editUser')->name('updateuser');
-Route::get('/deleteuser/{user_id}', 'AdminController@deleteUser')->name('deleteuser');
+Route::group(['middleware' => ['admin']], function () {
+	Route::any('/adduser', 'HomeController@saveUser')->name('adduser');
+	Route::any('/updateuser/{user_id}', 'AdminController@editUser')->name('updateuser');
+	Route::get('/deleteuser/{user_id}', 'AdminController@deleteUser')->name('deleteuser');
+});

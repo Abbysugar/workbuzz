@@ -146,24 +146,24 @@
             @endif
           </div>
 
-          <div class="field{{ $errors->has('status') ? ' has-error' : '' }}">
-            <label class="label">Status</label>
-            <p class="control has-icons-left">
-            <span class="select"> 
-                <select class="input" type="text" name="marital_status" value="{{ Auth::user()->marital_status}}">
-                  <option {{ (Auth::user()->marital_status == 'single') ? 'selected="selected"' : '' }}> single</option>
-                  <option {{ (Auth::user()->marital_status == 'married') ? 'selected="selected"' : '' }}> married</option>
-                  <option {{ (Auth::user()->marital_status == 'divorced') ? 'selected="selected"' : '' }}> divorced</option>
-                </select>
-              </span>
-            <span class="icon is-small is-left">
-              <i class="fa fa-heart"></i>
-            </span>
-              
-            </p>
-            @if ($errors->has('marital_status'))
-              <p class="help is-danger">{{ $errors->first('marital_status') }}</p>
-            @endif
+          <div class="field is-horizontal">
+            <div class="field-label">
+              <label class="label">Status</label>
+            </div>
+            <div class="field-body">
+              <div class="field is-narrow">
+                <div class="control">
+                  <label class="radio">
+                    <input type="radio" name="status" value="1"  {{ (Auth::user()->status == 1) ? 'checked="checked"' : '' }}>
+                    Active
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="status" value="0" {{ (Auth::user()->status == 0) ? 'checked="checked"' : '' }}>
+                    Inactive
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="group">

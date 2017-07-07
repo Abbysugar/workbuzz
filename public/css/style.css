@@ -1,26 +1,46 @@
 /* Tooltip container */
 .tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+		position: relative;
+		display: inline-block;
+		border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 }
 
 /* Tooltip text */
 .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
+		visibility: hidden;
+		width: 120px;
+		background-color: black;
+		color: #fff;
+		text-align: center;
+		padding: 5px 0;
+		border-radius: 6px;
  
-    /* Position the tooltip text - see examples below! */
-    position: absolute;
-    z-index: 1;
+		/* Position the tooltip text - see examples below! */
+		position: absolute;
+		z-index: 1;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
-    visibility: visible;
+		visibility: visible;
+}
+
+.greenball {
+		background: #42b72a;
+		border-radius: 50%;
+		display: inline-block;
+		height: 15px;
+		margin: 0 3px 1px 0;
+		vertical-align: middle;
+		width: 15px;
+}
+
+.blackball {
+		background: #000;
+		border-radius: 50%;
+		display: inline-block;
+		height: 15px;
+		margin: 0 3px 1px 0;
+		vertical-align: middle;
+		width: 15px;
 }
