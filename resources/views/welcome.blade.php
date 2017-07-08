@@ -11,19 +11,14 @@
                 WorkBuzz
               </a>
             </div>
-            <span class="nav-toggle">
+            <label for="menu-toggle" class="nav-toggle">
               <span></span>
               <span></span>
               <span></span>
-            </span>
+            </label>
+            <input type="checkbox" id="menu-toggle" class="is-hidden"/>
             <div class="nav-right nav-menu">
-              <!-- <a class="nav-item is-active">
-                Home
-              </a>
-              <a class="nav-item">
-                Examples
-              </a>
-              <a class="nav-item">
+             <!--  <a class="nav-item">
                 Documentation
               </a> -->
               <span class="nav-item">

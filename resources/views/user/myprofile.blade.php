@@ -57,7 +57,16 @@
           <div class="field{{ $errors->has('job_title') ? ' has-error' : '' }}">
             <label class="label">Department</label>
             <p class="control has-icons-left">
-              <input class="input" type="text" name="department" placeholder="department" value="{{ Auth::user()->department }}">
+               <span class="select"> 
+                <select class="input" type="text" name="department">
+                  <option {{ (Auth::user()->department == 'Human Resources') ? 'selected="selected"' : '' }}>Human Resources</option>
+                  <option {{ (Auth::user()->department == 'Web Development') ? 'selected="selected"' : '' }}>Web Development</option>
+                  <option {{ (Auth::user()->department == 'Software Engineering') ? 'selected="selected"' : '' }}>Software Engineering</option>
+                  <option {{ (Auth::user()->department == 'Accounts') ? 'selected="selected"' : '' }}>Accounts</option>
+                  <option {{ (Auth::user()->department == 'Social Media Management') ? 'selected="selected"' : '' }}>Social Media Management</option>
+                  <option {{ (Auth::user()->department == 'Business Management') ? 'selected="selected"' : '' }}>Business Management</option>
+                </select>
+              </span>
               <span class="icon is-small is-left">
                 <i class="fa fa-building"></i>
               </span>

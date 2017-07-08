@@ -15,9 +15,15 @@ class AdminController extends Controller
 
     public function viewUser($user_id)
     {
-        $user = User::where('id', $user_id)->first();
+        $user = User::where('id', $user_id);
+        
+        if ($user->exists()) {
+            $user = $user->first();
 
-        return view('user.viewuser', compact('user'));
+            return view('user.viewuser', compact('user'));
+        }
+
+        abort(404);
     }
 
     public function editUser(Request $request, $user_id)
@@ -29,15 +35,15 @@ class AdminController extends Controller
             case true:
              
                 $this->validate(request(), [
-                    'manager'      => 'required',
-                    'location'     => 'required',
-                    'dob'          => 'required',
-                    'job_title'    => 'required',
-                    'department' => 'required',
-                    'gender'       => 'required',
-                    'marital_status' => 'required',
-                    'address' => 'required',
-                    'phone' => 'required|max:11',
+                    'manager'      => 'required|string',
+                    'location'     => 'required|string',
+                    'dob'          => 'required|date',
+                    'job_title'    => 'required|string',
+                    'department' => 'required|string',
+                    'gender'       => 'required|string',
+                    'marital_status' => 'required|string',
+                    'address' => 'required|string',
+                    'phone' => 'required|integer|max:11',
                 ]);
             
             $user->manager = $request['manager'];

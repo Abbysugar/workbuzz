@@ -6,6 +6,7 @@ use Auth;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -55,6 +56,8 @@ class HomeController extends Controller
                         'hire_date' => $request->hire_date,
                         'job_title' => $request->job_title,
                         'role'      => 0,
+                        'password' => Hash::make('workbuzz'),
+            
                     ]);
 
                 return redirect()->back()->with(['message' => 'Successfully created user!']);
@@ -130,7 +133,7 @@ class HomeController extends Controller
                 if ($request->file('image') != null) {
 
                     $file     = $request->file('image');
-                    $filename = $request['name'] . '-' . $user->id . '.jpg';
+                    $filename = Auth::user()->name . '-' . $user->id . '.jpg';
 
                     Storage::disk('uploads')->put($filename, File::get($file));
 
