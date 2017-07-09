@@ -1,0 +1,28 @@
+language: php
+
+php:
+  - 7.0
+  - 7.1
+  - hhvm
+
+matrix:
+  allow-failures:
+    - php: hhvm
+  fast_finish: true
+
+install:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.pharninstall --dev --no-interaction
+
+script:
+  - mkdir -p build/logs
+  - php vendor/bin/phpunit -c phpunit.xml.dist
+
+after_success: 
+  - travis_retry php vendor/bin/coveralls
+  #or enable logging
+  - travis_retry php vendor/bin/coveralls -v
+
+notifications:
+  on_success: never 
+  on_failure: always
