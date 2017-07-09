@@ -19,7 +19,7 @@
       </div>
 
       <div class="content">
-         <p>Joined: {{ Carbon\Carbon::createFromFormat('d/m/Y', $user->hire_date)->toFormattedDateString() }}</p>
+         <p>Joined: {{ Carbon\Carbon::createFromFormat('Y-m-d', $user->hire_date)->toFormattedDateString() }}</p>
          <p>Manager: {{ $user->manager }}</p>
       </div>
     </div>
