@@ -30,15 +30,15 @@ class AdminController extends Controller
     {
         $method = $request->isMethod('post');
 
-        $user = User::where('id', $user_id);
+        $user = User::where('id', $user_id)->first();
 
-        if ($user->exists()) {
-            $user = $user->first();
+        // if ($user->exists()) {
+        //     $user = $user->first();
 
-            return view('user.edituser', compact('user'));
-        }
+        //     return view('user.edituser', compact('user'));
+        // }
 
-        abort(404);
+        // abort(404);
 
         switch ($method) {
             case true:
@@ -78,15 +78,15 @@ class AdminController extends Controller
 
     public function deleteUser($user_id)
     {
-    	$user = User::where( 'id', $user_id );
+    	$user = User::where( 'id', $user_id )->first();
 
-            if ($user->exists()) {
-                $user = $user->first();
+            // if ($user->exists()) {
+            //     $user = $user->first();
 
-                return view('user.viewuser', compact('user'));
-            }
+            //     return view('user.viewuser', compact('user'));
+            // }
 
-            abort(404);
+            // abort(404);
             $user->delete();
 
             return redirect()->back()->with(['message' => 'Successfully deleted user!!!']);
