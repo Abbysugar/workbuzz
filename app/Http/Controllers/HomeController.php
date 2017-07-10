@@ -117,15 +117,15 @@ class HomeController extends Controller
                     'status' => 'required',
                 ]);
 
-                $user = User::where('id', Auth::user()->id);
+                $user = User::where('id', Auth::user()->id)->first();
 
-                if ($user->exists()) {
-                    $user = $user->first();
+                // if ($user->exists()) {
+                //     $user = $user->first();
 
-                    return view('user.viewuser', compact('user'));
-                }
+                //     return view('user.viewuser', compact('user'));
+                // }
 
-                abort(404);
+                // abort(404);
 
                 $user->manager = $request->manager;
                 $user->location = $request->location;
