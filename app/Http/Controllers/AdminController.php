@@ -52,7 +52,7 @@ class AdminController extends Controller
                     'gender'       => 'required|string',
                     'marital_status' => 'required|string',
                     'address' => 'required|string',
-                    'phone' => 'required|integer|max:11',
+                    'phone' => 'required|digits:11',
                 ]);
             
             $user->manager = $request['manager'];
