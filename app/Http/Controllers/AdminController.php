@@ -35,7 +35,7 @@ class AdminController extends Controller
         if ($user->exists()) {
             $user = $user->first();
 
-            return view('user.viewuser', compact('user'));
+            return view('user.edituser', compact('user'));
         }
 
         abort(404);
