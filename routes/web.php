@@ -42,3 +42,8 @@ Route::group(['middleware' => ['admin']], function () {
 	Route::any('/updateuser/{user_id}', 'AdminController@editUser')->name('updateuser');
 	Route::get('/deleteuser/{user_id}', 'AdminController@deleteUser')->name('deleteuser');
 });
+
+/**
+ * Routes for the emails
+ */
+Route::post('/send', 'EmailController@send');

@@ -46,8 +46,11 @@ class HomeController extends Controller
                 $this->validate($request, [
                     'name'      => 'required',
                     'email'     => 'required|string|email|max:255|unique:users',
-                    'hire_date' => 'required',
-                    'job_title' => 'required',
+                    'hire_date' => 'required|date',
+                    'job_title' => 'required|string',
+                    'manager' => 'required|string',
+                    'department' => 'required|string',
+                    'gender' => 'required|string'
                 ]);
 
                 User::create([
@@ -55,12 +58,15 @@ class HomeController extends Controller
                         'email'     => $request->email,
                         'hire_date' => $request->hire_date,
                         'job_title' => $request->job_title,
+                        'manager' => $request->manager,
+                        'department' => $request->department,
+                        'gender' => $request->gender,
                         'role'      => 0,
                         'password' => Hash::make('workbuzz'),
             
                     ]);
 
-                return redirect()->back()->with(['message' => 'Successfully created user!']);
+                return redirect()->back()->with(['message' => 'Successfully added ' . $request->name]); 
 
             default:
                 return view('user.adduser');
@@ -105,16 +111,16 @@ class HomeController extends Controller
         switch ($method) {
             case true:
                 $this->validate(request(), [
-                    'manager'      => 'required',
-                    'location'     => 'required',
-                    'dob'          => 'required',
-                    'job_title'    => 'required',
-                    'department' => 'required',
-                    'gender'       => 'required',
-                    'marital_status' => 'required',
-                    'address' => 'required',
+                    'manager'      => 'required|string',
+                    'location'     => 'required|string',
+                    'dob'          => 'required|date',
+                    'job_title'    => 'required|string',
+                    'department' => 'required|string',
+                    'gender'       => 'required|string',
+                    'marital_status' => 'required|string',
+                    'address' => 'required|string',
                     'phone' => 'required|max:11',
-                    'status' => 'required',
+                    'status' => 'required|string',
                 ]);
 
                 $user = User::where('id', Auth::user()->id)->first();

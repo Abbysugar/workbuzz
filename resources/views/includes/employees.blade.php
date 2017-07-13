@@ -10,7 +10,7 @@
     <div class="media-content">
       <div class="content">
         <p>
-           <strong>{{ $user->name }}</strong>  <span class="{{ ($user->status == 1)  ? 'greenball' : 'blackball'  }}"></span><small>{{ $user->job_title }} in {{ $user->department }}</small>
+           <a href="{{ url('/userprofile/'.$user->id) }}"><strong>{{ $user->name }}</strong></a>  <span class="{{ ($user->status == 1)  ? 'greenball' : 'blackball'  }}"></span><small>{{ $user->job_title }} in {{ $user->department }}</small>
           <br>
           <small><i class="fa fa-map-marker"></i>&nbsp;&nbsp; {{ $user->location }} -</small><small>&nbsp;started {{ Carbon\Carbon::createFromFormat('Y-m-d', $user->hire_date)->toFormattedDateString() }}</small>
         </p>
@@ -18,10 +18,12 @@
       @if(!\Request::is('home'))
       <nav class="level is-mobile">
         <div class="level-left">
+          @if (Auth::user()->role == 0)
           <a href="{{ url('/userprofile/'.$user->id) }}" class="level-item tooltip">
             <span class="icon is-small"><i class="fa fa-eye"></i></span>
             <span class="tooltiptext"> View Profile </span>
           </a>
+          @endif
           @if (Auth::user()->role == 1)
             <a href="{{ url('/updateuser/'.$user->id) }}" class="level-item tooltip">
               <span class="icon is-small"><i class="fa fa-pencil"></i></span>

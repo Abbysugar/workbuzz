@@ -45,7 +45,7 @@
           <div class="field{{ $errors->has('email') ? ' has-error' : '' }}">
             <label class="label">Email</label>
             <p class="control has-icons-left">
-              <input class="input" type="text" name="email" placeholder="Email" value="{{ old('email') }}">
+              <input class="input" type="text" name="email" placeholder="employee email" value="{{ old('email') }}">
               <span class="icon is-small is-left">
                 <i class="fa fa-envelope"></i>
               </span>
@@ -68,6 +68,19 @@
             @endif
           </div>
 
+          <div class="field{{ $errors->has('manager') ? ' has-error' : '' }}">
+            <label class="label">Manager</label>
+            <p class="control has-icons-left">
+              <input class="input" type="text" name="manager" placeholder="manager's name" value="{{ old('manager') }}">
+              <span class="icon is-small is-left">
+                <i class="fa fa-user"></i>
+              </span>
+            </p>
+            @if ($errors->has('manager'))
+              <p class="help is-danger">{{ $errors->first('manager') }}</p>
+            @endif
+          </div>
+
           <div class="field{{ $errors->has('department') ? ' has-error' : '' }}">
             <label class="label">Department</label>
             <p class="control has-icons-left">
@@ -85,6 +98,26 @@
             </p>
             @if ($errors->has('department'))
               <p class="help is-danger">{{ $errors->first('department') }}</p>
+            @endif
+          </div>
+
+           <div class="field{{ $errors->has('gender') ? ' has-error' : '' }}">
+            <label class="label">Sex</label>
+            <p class="control has-icons-left">
+            <span class="select"> 
+                <select class="input" type="text" name="gender">
+                  <option {{ (Auth::user()->gender == 'female') ? 'selected="selected"' : '' }}>female</option>
+                  <option {{ (Auth::user()->gender == 'male') ? 'selected="selected"' : '' }}>male</option>
+                  <option {{ (Auth::user()->gender == 'other') ? 'selected="selected"' : '' }}>other</option>
+                </select>
+              </span>
+            <span class="icon is-small is-left">
+              <i class="fa fa-user"></i>
+            </span>
+              
+            </p>
+            @if ($errors->has('gender'))
+              <p class="help is-danger">{{ $errors->first('gender') }}</p>
             @endif
           </div>
 
