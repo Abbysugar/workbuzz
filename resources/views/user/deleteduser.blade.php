@@ -1,4 +1,8 @@
-@include('includes.error')
+@extends('layouts.app')
+
+@section('content')
+@include('includes.header')
+
 @foreach($users as $user)
 <div class="box">
   <article class="media">
@@ -18,20 +22,10 @@
       @if(!\Request::is('home'))
       <nav class="level is-mobile">
         <div class="level-left">
-          @if (Auth::user()->role == 0)
-          <a href="{{ url('/userprofile/'.$user->id) }}" class="level-item tooltip">
-            <span class="icon is-small"><i class="fa fa-eye"></i></span>
-            <span class="tooltiptext"> View Profile </span>
-          </a>
-          @endif
           @if (Auth::user()->role == 1)
-            <a href="{{ url('/updateuser/'.$user->id) }}" class="level-item tooltip">
-              <span class="icon is-small"><i class="fa fa-pencil"></i></span>
-               <span class="tooltiptext"> Edit Profile </span>
-            </a>
-            <a href="{{ url('/deleteuser/'.$user->id) }}" class="level-item tooltip">
-              <span class="icon is-small"><i class="fa fa-trash"></i></span>
-               <span class="tooltiptext"> Delete Profile </span>
+            <a href="{{ url('/restoreuser/'.$user->id) }}" class="level-item tooltip">
+              <span class="icon is-small"><i class="fa fa-refresh"></i></span>
+               <span class="tooltiptext"> Activate User </span>
             </a>
           @endif
         </div>
@@ -41,5 +35,6 @@
   </article>
 </div>
 @endforeach
+@endsection
 
 {{ $users->links() }}

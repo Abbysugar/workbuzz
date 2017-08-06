@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\User;
+use Cloudder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -147,11 +148,13 @@ class HomeController extends Controller
                 if ($request->file('image') != null) {
 
                     $file     = $request->file('image');
-                    $filename = Auth::user()->name . '-' . $user->id . '.jpg';
+                    // $filename = Auth::user()->name . '-' . $user->id . '.jpg';
+                    $image = Cloudder::upload($request->file('image'));
+                    $imageUrl = Cloudder::show(Cloudder::getPublicId());
+                    // Storage::disk('uploads')->put($filename, File::get($file));
 
-                    Storage::disk('uploads')->put($filename, File::get($file));
-
-                    $user->image = $filename;
+                    // $user->image = $filename;
+                    $user->image = $imageUrl;
                 }
 
                 $user->save();

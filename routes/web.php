@@ -38,9 +38,12 @@ Route::group(['middleware' => ['user']], function () {
  * edit and delete users
  */
 Route::group(['middleware' => ['admin']], function () {
+	Route::get('/getdeleted', 'AdminController@getDeleted')->name('getdeleted');
 	Route::any('/adduser', 'HomeController@saveUser')->name('adduser');
 	Route::any('/updateuser/{user_id}', 'AdminController@editUser')->name('updateuser');
 	Route::get('/deleteuser/{user_id}', 'AdminController@deleteUser')->name('deleteuser');
+	Route::get('/restoreuser/{user_id}', 'AdminController@restoreUser')->name('restoreuser');
+
 });
 
 /**

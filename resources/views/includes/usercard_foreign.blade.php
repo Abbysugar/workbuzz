@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
-        <img src="/uploads/{{ $user->image }}" alt="Image">
+        <img src="{{ $user->image }}" alt="Image">
       </figure>
     </div>
     <div class="card-content">

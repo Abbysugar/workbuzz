@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
-        <img src="uploads/{{ Auth::user()->image }}" alt="Image">
+        <img src="{{ Auth::user()->image }}" alt="Image">
       </figure>
     </div>
     <div class="card-content">

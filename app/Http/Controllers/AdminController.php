@@ -29,7 +29,7 @@ class AdminController extends Controller
     public function editUser(Request $request, $user_id)
     {
         $method = $request->isMethod('post');
-
+        
         $user = User::where('id', $user_id)->first();
 
         // if ($user->exists()) {
@@ -90,5 +90,20 @@ class AdminController extends Controller
             $user->delete();
 
             return redirect()->back()->with(['message' => 'Successfully deleted user!!!']);
+    }
+
+    public function getDeleted()
+    {
+        $users = User::onlyTrashed()->paginate(10);
+
+        return view('user.deleteduser', compact('users'));
+    }
+
+    public function restoreUser($user_id)
+    {
+        $user = User::onlyTrashed()->where('id', $user_id)->restore();
+
+        return redirect()->back()->with(['message' => 'Successfully restored user!!!']);
+    
     }
 }

@@ -34,6 +34,9 @@
                   <a href="{{ route('adduser') }}" class="nav-item">
                     Add User
                   </a>
+                  <a href="{{ route('getdeleted') }}" class="nav-item">
+                    Deactivated Users
+                  </a>
                 @endif
             </span>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
